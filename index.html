@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DLT Unit-04 - Questions</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+      font-size: 1rem;
+    }
+    header {
+      background-color: #0077cc;
+      color: white;
+      padding: 1rem 0.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      page-break-after: always;
+    }
+    h2 {
+      color: #0077cc;
+      margin: 2rem 0 1rem;
+      font-size: 1.6rem;
+    }
+    h3 {
+      color: #444;
+      margin-top: 0.8rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    p {
+      margin: 0.5rem 0;
+    }
+    ul {
+      margin: 0.3rem 0 1rem 1rem;
+      padding-left: 1rem;
+    }
+    li>ul {
+      margin-top: 0.3rem;
+      margin-bottom: 0.6rem;
+      padding-left: 0.7rem;
+    }
+    li>ul>li {
+      margin-bottom: 0.4rem;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1rem auto;
+      border-radius: 6px;
+    }
+    @media (max-width: 768px) {
+      body {
+        font-size: 0.95rem;
+      }
+      header {
+        font-size: 1.3rem;
+        padding: 0.8rem 0.5rem;
+      }
+      .container {
+        padding: 0.9rem;
+        margin: 1.5rem auto;
+      }
+      h2 {
+        font-size: 1.3rem;
+        margin-top: 1.8rem;
+      }
+      h3 {
+        font-size: 1.1rem;
+        margin-top: 0.7rem;
+      }
+      ul {
+        margin-left: 0.5rem;
+        padding-left: 0.7rem;
+      }
+      li>ul {
+        margin-top: 0.2rem;
+        margin-bottom: 0.4rem;
+        padding-left: 0.5rem;
+      }
+      li>ul>li {
+        margin-bottom: 0.3rem;
+      }
+      ul li {
+        font-size: 0.95rem;
+        line-height: 1.3rem;
+      }
+    }
+    @media print {
+      .container {
+        page-break-after: always;
+      }
+    }
+    img {
+      display: block;
+      max-width: 55%;
+      height: auto;
+      max-height: 280px;
+      object-fit: contain;
+      margin: 1rem auto;
+      border-radius: 6px;
+    }
+    #lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+    #lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    #lightbox img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+    #lightbox.active img {
+      transform: scale(1);
+      cursor: zoom-out;
+    }
+    #image-tip {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 119, 204, 0.95);
+      color: #fff;
+      padding: 0.8rem 1.2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease;
+    }
+    #image-tip.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    img:hover {
+      transform: scale(1.05);
+    }
+     /* Table base styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      background: transparent;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 0.8rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #0077cc;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #e6f0ff;
+    }
+
+    /* Make tables horizontally scrollable on small screens instead of restructuring into blocks.
+       This preserves semantics and improves readability. */
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+    }
+
+    /* optional minimum width so complex tables remain readable on desktop and can scroll on mobile */
+    .table-responsive table {
+      min-width: 640px; /* adjust as needed */
+    }
+            pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 0 6px 6px 6px;
+            overflow-x: auto;
+            margin: -6px 0 0.6rem 1rem;
+            font-size: 0.95rem;
+            border: 1px solid #ddd;
+        }
+        .output {
+            margin: 0 0 0 1.2rem;
+            padding: 0.45rem 0.8rem;
+            font-size: 1rem;
+            background: #f8f8fa;
+            border-radius: 4px;
+            border-left: 3px solid #50aaff;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0.7rem; }
+            h2 { font-size: 1.13rem; margin-top: 1rem;}
+            .code-label, pre { margin-left: 0.5rem; font-size: 0.87rem; }
+            .output { margin-left: 0.6rem; font-size: 0.96rem; padding: 0.36rem 0.6rem;}
+        }
+        @media (max-width: 480px) {
+            ul, ul ul { margin-left: 0.46rem !important; padding-left: 0.5rem !important;}
+        }
+  </style>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WJ8GK8VNS9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WJ8GK8VNS9');
+</script>
+</head>
+<body>
+  <header>
+    DLT Unit-04
+  </header>
+  <div id="image-tip">💡 Click on any image for better visualizing!</div>
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="Enlarged image">
+  </div>
+  <div class="container">
+    <h2>1) Neural Networks and Representation Learning</h2>
+    <h3>Neural Network:</h3>
+    <ul>
+      <li>A neural Network is a type of Machine Learning Model inspired by the human brain</li>
+      <li>Deep Learning uses a neural network for learning the model</li>
+      <li>There are so many types of neural networks. Some of them are:
+        <ul>
+          <li>a) ANN</li>
+          <li>b) CNN</li>
+          <li>c) RNN</li>
+        </ul>
+      </li>
+    </ul>
+    <h3>Representation Learning:</h3>
+    <ul>
+      <li>The process of extracting important features from the raw data by the neural network is called as Representation Learning</li>
+      <li>Representation Learning is also called as Feature Learning</li>
+    </ul>
+    <img src="WhatsApp Image 2025-11-30 at 02.11.13_b88ce5a6.jpg" alt="Representation Learning"/>
+  </div>
+  <header>
+    DLT Unit-04
+  </header>
+  <div class="container">
+    <h2>2) Convolutional Operation, Filters in CNN</h2>
+    <ul>
+      <li>Convolutional Operation is the mathematical operation used in CNN to extract the important features from the raw data</li>
+    </ul>
+    <h3>Single channel Convolution vs Multi-Channel Convolution</h3>
+<table border="1" cellpadding="8">
+  <tr>
+    <th>Single Channel Convolution</th>
+    <th>Multi-Channel Convolution</th>
+  </tr>
+
+  <tr>
+    <td>It uses a single channel to process the input in the CNN</td>
+    <td>It uses multiple channels to process the input in the CNN</td>
+  </tr>
+
+  <tr>
+    <td>Input Data: 2D Matrix</td>
+    <td>Input Data: 3D Tensor</td>
+  </tr>
+
+  <tr>
+    <td>Kernel: 2D Filter</td>
+    <td>Kernel: 3D Filter</td>
+  </tr>
+
+  <tr>
+    <td>Output: 2D Feature Map</td>
+    <td>Output: 3D Feature Map</td>
+  </tr>
+
+  <tr>
+    <td>It uses a few Parameters</td>
+    <td>It uses more parameters</td>
+  </tr>
+
+  <tr>
+    <td>Low Cost</td>
+    <td>High Cost</td>
+  </tr>
+
+  <tr>
+    <td><img src="IMG-20251130-WA0010.jpg" alt="Single Channel Convolution"/></td>
+    <td><img src="WhatsApp Image 2025-11-10 at 18.48.20_bc98e0d2.jpg" alt="Multi-Channel Convolution"/></td>
+  </tr>
+</table>
+    <h3>Filters in CNN:</h3>
+    <ul>
+      <li>Filters are also called as Kernels</li>
+      <li>It is a 2D matrix or 3D Tensor that slides over the input</li>
+      <li>It automatically detects important features like:
+        <ul>
+          <li>Height</li>
+          <li>Width</li>
+          <li>Edges</li>
+        </ul>
+      </li>
+      <li>32 Filters -> 32 Feature Maps</li>
+      <li>64 Filters -> 64 Feature Maps</li>
+    </ul>
+  </div>
+  <header>
+    DLT Unit-04
+  </header>
+  <div class="container">
+    <h2>3) Strides and Padding in CNN</h2>
+    <h3>Stride:</h3>
+    <ul>
+      <li>The process of moving the kernel horizontally and vertically at each step during a convolution operation is called the stride</li>
+      <li>The size of the feature map decreases because of the stride</li>
+      <li>Loss of Information</li>
+      <li>(5 X 5) X (3 X 3) -> (2 X 2)</li>
+    </ul>
+    <img src="IMG-20251130-WA0010.jpg" alt="Stride in CNN"/>
+    <h3>Padding:</h3>
+    <ul>
+      <li>The process of adding the pixels around the border of the input image is called as Padding</li>
+      <li>The size of the feature map is equal to the input size</li>
+      <li>prevent loss of information</li>
+      <li>(5 X 5) X (3 X 3) -> (5 X 5)</li>
+    </ul>
+    <img src="IMG-20251130-WA0011.jpg" alt="Padding in CNN"/>
+  </div>
+  <header>
+    DLT Unit-04
+  </header>
+  <div class="container">
+    <h2>4) Weight Sharing and Uses of CNN</h2>
+    <h3>Weight Sharing:</h3>
+    <ul>
+      <li>The process of using the same filters across different parts of the input image is called as Weight Sharing</li>
+      <li>Uses of Weight Sharing:
+        <ul>
+          <li>Few Parameters</li>
+          <li>Trains the model quickly</li>
+          <li>Reduce Overfitting</li>
+          <li>Translation-invariant</li>
+        </ul>
+      </li>
+    </ul>
+    <img src="IMG-20251130-WA0010.jpg" alt="Weight Sharing"/>
+    <h3>Uses of CNN:</h3>
+    <ul>
+      <li>They Extract Invariant Features</li>
+      <li>They Extract Hierarchical Features</li>
+      <img src="IMG-20251130-WA0012.jpg" alt="Uses of CNN"/>
+      <li>CNNs are faster and efficient when compared to other neural networks</li>
+    </ul>
+  </div>
+  <header>
+    DLT Unit-04
+  </header>
+  <div class="container">
+    <h2>5) BPTT Algorithm in RNN</h2>
+    <ul>
+      <li>BPTT stands for BackPropagation Through Time</li>
+      <li>It is used to update the weights to reduce the errors</li>
+    </ul>
+    <h3>steps:</h3>
+    <img src="IMG-20251130-WA0013.jpg" alt="BPTT Algorithm"/>
+    <img src="IMG-20251130-WA0014.jpg" alt="BPTT Algorithm"/>
+  </div>
+  <header>
+    DLT Unit-04
+  </header>
+  <div class="container">
+    <h2>6) GRU in RNN</h2>
+<table border="1" cellpadding="8">
+  <tr>
+    <th>GRU</th>
+    <th>LSTM</th>
+  </tr>
+
+  <tr>
+    <td>GRU stands for Gated Recurrent Unit</td>
+    <td>LSTM stands for Long Short-Term Memory</td>
+  </tr>
+
+  <tr>
+    <td>GRU is an Advanced type of RNN</td>
+    <td>LSTM is an Advanced type of RNN</td>
+  </tr>
+
+  <tr>
+    <td>GRU is used to solve the Vanishing Gradient Problem</td>
+    <td>LSTM is used to solve the Vanishing Gradient Problem</td>
+  </tr>
+
+  <tr>
+    <td>There are mainly two types of gates used in GRU. They are:
+      <ul>
+        <li>Update Gate</li>
+        <li>Reset Gate</li>
+      </ul>
+    </td>
+    <td>There are mainly three types of gates used in LSTM. They are:
+      <ul>
+        <li>Forget Gate</li>
+        <li>Input Gate</li>
+        <li>Output Gate</li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td>There is no Cell State</td>
+    <td>There is a Cell State in LSTM</td>
+  </tr>
+
+  <tr>
+    <td>It uses a few Parameters</td>
+    <td>It uses more parameters</td>
+  </tr>
+
+  <tr>
+    <td>Low Cost</td>
+    <td>High Cost</td>
+  </tr>
+
+  <tr>
+    <td><img src="IMG-20251130-WA0015.jpg" alt="GRU"/></td>
+    <td><img src="IMG-20251130-WA0016.jpg" alt="LSTM"/></td>
+  </tr>
+</table>
+  </div>
+  <header>
+    DLT Unit-04
+  </header>
+  <div class="container">
+    <h2>7) PyTorch vs TensorFlow</h2>
+<table border="1" cellpadding="8">
+  <tr>
+    <th>PyTorch</th>
+    <th>TensorFlow</th>
+  </tr>
+
+  <tr>
+    <td>PyTorch was developed by Facebook</td>
+    <td>TensorFlow was developed by Google</td>
+  </tr>
+
+  <tr>
+    <td>It is from the Torch Library</td>
+    <td>It is from the Python Library</td>
+  </tr>
+
+  <tr>
+    <td>It works on the Dynamic Graph</td>
+    <td>It works on a Static Graph</td>
+  </tr>
+
+  <tr>
+    <td>Very Simple</td>
+    <td>Very Complex</td>
+  </tr>
+
+  <tr>
+    <td>Very Weak</td>
+    <td>Very Strong</td>
+  </tr>
+
+  <tr>
+    <td>PyTorch has a Smaller Community</td>
+    <td>TensorFlow has a Larger Community</td>
+  </tr>
+
+    <tr>
+    <td>PyTorch has few features when compared to TensorFlow</td>
+    <td>TensorFlow has more features when compared to PyTorch</td>
+  </tr>
+
+  <tr>
+    <td>More Scalable</td>
+    <td>Less Scalable</td>
+  </tr>
+
+  <tr>
+    <td>More Flexible</td>
+    <td>Less Flexible</td>
+  </tr>
+</table>
+</div>
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    document.querySelectorAll("img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add("active");
+      });
+    });
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("active");
+    });
+  </script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const tip = document.getElementById("image-tip");
+      tip.classList.add("show");
+      setTimeout(() => {
+        tip.classList.remove("show");
+      },5000);
+    });
+  </script>
+</body>
+</html>
